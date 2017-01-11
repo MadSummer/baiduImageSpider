@@ -35,8 +35,8 @@ class user {
           self.info.activeTime[k] = v;
           self.info.active.push(active);
           let k1 = config.activeType.get(active.verb);
-          let v1 = self.info.activeType[k1]  !== undefined ? self.info.activeType[k1] + 1 : 1;
-          self.info.activeType[k1] = v1 ;
+          let v1 = self.info.activeType[k1] !== undefined ? self.info.activeType[k1] + 1 : 1;
+          self.info.activeType[k1] = v1;
         });
         if (!res.body.paging.is_end && self.info.total < config.max) {
           let url = res.body.paging.next;
