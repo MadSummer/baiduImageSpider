@@ -1,13 +1,8 @@
 'use strict';
 // 项目配置文件
 module.exports = {
-  https: true, //是否为https
-  baseURL: 'https://www.zhihu.com', // 知乎URL
-  api: 'https://www.zhihu.com/api/v4/members', // 知乎API URL
-  userpageURL: 'www.zhihu.com/people',
-  search: 'https://www.zhihu.com/r/search',
-  max: '1000',
-  limit:'20',
+  browserURL: 'https://image.baidu.com/search/index?tn=baiduimage&word=%E5%91%A8%E6%9D%B0%E4%BC%A6',
+  getJSONURL:'https://image.baidu.com/search/acjson?tn=resultjson_com&word=%E5%91%A8%E6%9D%B0%E4%BC%A6&pn=1&rn=10&ipn=rj',
   requestHeader: {
     'Accept': '*/*',
     'Accept-Encoding': 'gzip, deflate, sdch, br',
@@ -19,14 +14,5 @@ module.exports = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36',
     'X-Requested-With': 'XMLHttpRequest',
     'authorization': 'Bearer Mi4wQUdBQ3pyOUlGZ3NBTUFJcVFFc1dDeGNBQUFCaEFsVk5Kem1RV0FCYmFoVWk1QlQ1aFNZNVNrUy0taElXU0lSaFBR|1483254872|67f764770c5c030bd864cbed1a284e04ee263ab3'
-  },
-  activeType: new Map([
-    ['ANSWER_CREATE','回答'],
-    ['ANSWER_VOTE_UP','赞同回答'],
-    ['QUESTION_FOLLOW','关注问题'],
-    ['MEMBER_VOTEUP_ARTICLE','赞同文章'],
-    ['TOPIC_FOLLOW','关注话题'],
-    ['MEMBER_CREATE_ARTICL', '发布文章'],
-    ['MEMBER_COLLECT_ANSWER','收藏回答']
-  ])
+  }
 }
