@@ -1,8 +1,10 @@
 'use strict';
 // 项目配置文件
 module.exports = {
-  browserURL: 'https://image.baidu.com/search/index?tn=baiduimage&word=%E5%91%A8%E6%9D%B0%E4%BC%A6',
-  getJSONURL:'https://image.baidu.com/search/acjson?tn=resultjson_com&word=%E5%91%A8%E6%9D%B0%E4%BC%A6&pn=1&rn=10&ipn=rj',
+  rn: 10, // 每页的条数
+  total:5, // 每次任务执行页数
+  browserURL: 'https://image.baidu.com/search/index?tn=baiduimage&',
+  getJSONURL:'https://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&',
   requestHeader: {
     'Accept': '*/*',
     'Accept-Encoding': 'gzip, deflate, sdch, br',

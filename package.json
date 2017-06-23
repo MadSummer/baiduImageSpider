@@ -9,6 +9,10 @@
   "author": "LIUJING",
   "license": "MIT",
   "dependencies": {
+    "co": "^4.6.0",
+    "log": "^1.4.0",
+    "log4js": "^1.1.1",
+    "mkdirp": "^0.5.1",
     "request": "^2.81.0"
   }
 }
