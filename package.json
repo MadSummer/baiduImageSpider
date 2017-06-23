@@ -13,6 +13,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.1",
     "co": "^4.6.0",
+    "iconv-lite": "^0.4.18",
     "log": "^1.4.0",
     "log4js": "^1.1.1",
     "mkdirp": "^0.5.1",
