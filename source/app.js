@@ -24,10 +24,13 @@ start(index);
 
 function start(index) {
   fs.readFile(path.resolve(__dirname, '../result.json'), 'utf8', (err, result) => {
-    if (err) return log.error(`读取结果文件出错！！！`);
+    if (err) {
+      log.error(`读取结果文件出错，读取路径：\n${path.resolve(__dirname, '../result.json')}\n${err.message}`);
+      return;
+    }
     let data = JSON.parse(result);
     let star = data[index];
-    if (!star) return log.debug(`全部抓取完成！！！！！！`);
+    if (!star) return log.debug(`全部抓取完成`);
     if (current[index] > CONFIG.total) {
       log.debug(`${star.name}抓取${star.pn}页完成`);
       index++;
