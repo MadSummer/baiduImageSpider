@@ -5,12 +5,13 @@ const path = require('path');
 const pinyin = require('node-pinyin');
 const Iconv = require('iconv-lite');
 const result = path.resolve(__dirname, '../result.json');
+const mv = require('mv');
 request
   .get({
-    url: 'http://top.baidu.com/buzz?b=3&c=9&fr=topcategory_c9',
+    url: 'http://top.baidu.com/buzz?b=22&c=9&fr=topbuzz_b3_c9',
     encoding: null
   }, (err, res, body) => {
-    const $ = cheerio.load(Iconv.decode(body,'gb2312').toString());
+    const $ = cheerio.load(Iconv.decode(body, 'gb2312').toString());
     const names = $('.list-table tr .keyword .list-title');
     let arr = [];
     fs.exists(result, exist => {
@@ -33,6 +34,8 @@ request
                   style: 'normal'
                 }).join('')
               })
+            } else {
+              stars[i].sex = 'female'
             }
           });
           fs.writeFileSync(result, JSON.stringify(stars));

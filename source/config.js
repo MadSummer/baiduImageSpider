@@ -1,7 +1,7 @@
 'use strict';
 // 项目配置文件
 module.exports = {
-  rn: 10, // 每页的条数
+  rn: 30, // 每页的条数
   total:20, // 每次任务执行页数
   browserURL: 'https://image.baidu.com/search/index?tn=baiduimage&',
   getJSONURL:'https://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&',
