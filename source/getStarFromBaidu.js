@@ -22,7 +22,7 @@ getStarsFromBaidu('http://top.baidu.com/buzz?b=22&c=9&fr=topbuzz_b3_c9', 'male',
  * @param {function} cb
  * callback
  */
-function getStarsFromBaidu(url, sex,cb) {
+function getStarsFromBaidu(url, sex, cb) {
   request
     .get({
       url: url,
@@ -31,35 +31,41 @@ function getStarsFromBaidu(url, sex,cb) {
       const $ = cheerio.load(Iconv.decode(body, 'gb2312').toString());
       const names = $('.list-table tr .keyword .list-title');
       let arr = [];
+      let stars;
       fs.exists(result, exist => {
         if (exist) {
           fs.readFile(result, 'utf8', (err, data) => {
             if (err) return console.log(`读取文件出错`);
             if (!data) data = '[]';
-            let stars = JSON.parse(data);
+            stars = JSON.parse(data);
             stars.forEach(star => {
               arr.push(star.name);
             });
-            names.each((i, e) => {
-              let name = $(e).text();
-              if (arr.indexOf(name) === -1) {
-                stars.push({
-                  name: name,
-                  pn: 0,
-                  sex: sex,
-                  folder: pinyin(name, {
-                    style: 'normal'
-                  }).join('')
-                })
-              } else {
-                stars[i].sex = sex
-              }
-            });
-            fs.writeFileSync(result, JSON.stringify(stars));
-            typeof cb === 'function' && cb();
+            pushStar();
           });
+        } else {
+          stars = [];
+          pushStar();
         }
       });
+
+      function pushStar() {
+        names.each((i, e) => {
+          let name = $(e).text();
+          if (arr.indexOf(name) === -1) {
+            stars.push({
+              name: name,
+              pn: 0,
+              sex: sex,
+              folder: pinyin(name, {
+                style: 'normal'
+              }).join('')
+            })
+          }
+        });
+        fs.writeFileSync(result, JSON.stringify(stars));
+        typeof cb === 'function' && cb();
+      }
     });
 }
 
