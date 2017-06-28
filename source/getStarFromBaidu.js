@@ -65,6 +65,7 @@ function getStarsFromBaidu(url, sex, cb) {
         });
         fs.writeFileSync(result, JSON.stringify(stars));
         typeof cb === 'function' && cb();
+        console.log(`获取明星列表完毕`);
       }
     });
 }
