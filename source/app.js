@@ -59,6 +59,7 @@ function getResult(rn, star) {
       result = JSON.parse(body);
     } catch (error) {
       log.debug(`parse response error!!!`);
+      start(index + 1);
     }
     if (!result) return;
     if (result.data instanceof Array) {
