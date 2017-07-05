@@ -1,3 +1,9 @@
+/*
+ * @Author: Liu Jing 
+ * @Date: 2017-07-03 16:54:02 
+ * @Last Modified by:   Liu Jing 
+ * @Last Modified time: 2017-07-03 16:54:02 
+ */
 const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
