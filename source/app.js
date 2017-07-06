@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:21 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-06 15:01:23
+ * @Last Modified time: 2017-07-06 17:37:23
  */
 const CONFIG = require('./config');
 const request = require('request-promise');
@@ -51,7 +51,6 @@ function start() {
     const endTime = +new Date() / 1000;
     log.info(`本次任务耗时${Math.round(endTime - startTime)}秒,抓取成功${successNum},抓取失败${failedNum}`);
   }).catch(err => {
-    debugger;
     log.error(err)
   });
 }

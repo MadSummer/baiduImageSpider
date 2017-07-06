@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:02 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-06 12:31:55
+ * @Last Modified time: 2017-07-06 18:02:17
  */
 const fs = require('fs');
 const request = require('request-promise');
@@ -66,3 +66,12 @@ function getStarsFromBaidu(url, sex, cb) {
       });
     });
 }
+
+var str = 'asdfssaaasasasasaa';
+var set = new Set();
+var obj = {};
+var max = 0;
+for (let s of str) {
+  obj[s] == undefined ? obj[s] = 1 : obj[s] += 1;
+}
+Math.max.apply(null,Object.values(obj))
