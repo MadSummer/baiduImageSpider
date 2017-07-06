@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:21 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-05 18:09:20
+ * @Last Modified time: 2017-07-06 15:01:23
  */
 const CONFIG = require('./config');
 const request = require('request-promise');
@@ -13,10 +13,17 @@ const log = require('./log');
 const readFile = require('fs-readfile-promise');
 const getJSON = require('./getJSON');
 const getImage = require('./getImage');
+let successNum = 0;
+let failedNum = 0;
+
+
+
 
 start();
 
+
 function start() {
+  const startTime = +new Date() / 1000;
   co(function* () {
     let result = yield readFile(path.resolve(__dirname, '../result.json'));
     let data = JSON.parse(result);
@@ -27,14 +34,22 @@ function start() {
         if (!list.data) return;
         for (let k = 0; k < list.data.length; k++) {
           let data = list.data[k];
-          yield getImage(data, obj);
+          let flag = yield getImage(data, obj);
+          if (flag) {
+            successNum += 1;
+          }
+          if (!flag) {
+            failedNum += 1;
+          }
         }
+        log.debug(`${obj.name}第${obj.pn}页抓取完成`);
         obj.pn += 1;
         fs.writeFileSync(path.resolve(__dirname, '../result.json'), JSON.stringify(data));
-        log.debug(`${obj.name}第${obj.pn}页抓取完成`);
       }
     }
     log.debug(`本次任务执行完成`);
+    const endTime = +new Date() / 1000;
+    log.info(`本次任务耗时${Math.round(endTime - startTime)}秒,抓取成功${successNum},抓取失败${failedNum}`);
   }).catch(err => {
     debugger;
     log.error(err)

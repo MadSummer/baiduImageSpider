@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:13 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-05 17:09:02
+ * @Last Modified time: 2017-07-06 10:39:28
  */
 const rimraf = require('rimraf');
 const path = require('path');
@@ -20,6 +20,6 @@ rimraf(path.resolve(__dirname, '../images'), (err) => {
       star.pn = 1;
     });
     fs.writeFileSync(path.resolve(__dirname, '../result.json'), JSON.stringify(data));
-    console.log(`清除爬取进度完成！`);
+    console.log(`清除爬取进度完成！`); 
   });
 })
