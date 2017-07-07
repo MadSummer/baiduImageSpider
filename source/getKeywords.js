@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:02 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-06 18:02:17
+ * @Last Modified time: 2017-07-07 09:37:07
  */
 const fs = require('fs');
 const request = require('request-promise');
@@ -48,30 +48,21 @@ function getStarsFromBaidu(url, sex, cb) {
             objs.forEach(star => {
               arr.push(star.name);
             });
+            names.each((i, e) => {
+              let name = $(e).text();
+              if (arr.indexOf(name) === -1) {
+                objs.push({
+                  name: name,
+                  pn: 1,
+                  folder: `${sex}/${pinyin(name, {style: 'normal'}).join('')}`
+                })
+              }
+            });
+            fs.writeFileSync(result, JSON.stringify(objs));
+            typeof cb === 'function' && cb();
+            console.log(`获取明星列表完毕`);
           });
         }
-        names.each((i, e) => {
-          let name = $(e).text();
-          if (arr.indexOf(name) === -1) {
-            objs.push({
-              name: name,
-              pn: 1,
-              folder: `${sex}/${pinyin(name, {style: 'normal'}).join('')}`
-            })
-          }
-        });
-        fs.writeFileSync(result, JSON.stringify(objs));
-        typeof cb === 'function' && cb();
-        console.log(`获取明星列表完毕`);
       });
     });
 }
-
-var str = 'asdfssaaasasasasaa';
-var set = new Set();
-var obj = {};
-var max = 0;
-for (let s of str) {
-  obj[s] == undefined ? obj[s] = 1 : obj[s] += 1;
-}
-Math.max.apply(null,Object.values(obj))
