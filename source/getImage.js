@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 18:23:57 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-06 17:36:48
+ * @Last Modified time: 2017-07-07 16:31:36
  */
 
 const request = require('request-promise');
@@ -78,6 +78,7 @@ module.exports = function (data, obj) {
       yield mkdirp(imgPath);
       let options = {
         url: imgURL,
+        timeout:10000,
         encoding: null
       }
       let img = yield rp.get(options);

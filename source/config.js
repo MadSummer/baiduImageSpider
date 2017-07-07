@@ -2,13 +2,13 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:09 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-06 16:04:00
+ * @Last Modified time: 2017-07-07 09:40:43
  */
 'use strict';
 // 项目配置文件
 module.exports = {
   rn: 30, // 每页的条数
-  total:10, // 每次任务执行页数
+  total:5, // 每次任务执行页数
   browserURL: 'https://image.baidu.com/search/index?tn=baiduimage&',
   getJSONURL: 'https://image.baidu.com/search/acjson?tn=resultjson_com&ipn=rj&',
   largeImgBaseUrl: 'https://image.baidu.com/search/detail?',
