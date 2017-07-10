@@ -1,4 +1,6 @@
 # baiduImageSpider
-根据配置文件爬取百度图片，目前为小图
+这个项目主要用来爬取百度图片
 # 使用方法
-打开result.json，修改需要爬取的明星，可以增删。然后执行app.js
+1. clone本项目到本地
+2. 项目内打开命令行，运行npm(cnpm) i，安装依赖
+3. 运行 cnpm start，开始任务。
