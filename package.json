@@ -1,7 +1,7 @@
 {
   "name": "baiduimagespider",
   "version": "1.0.0",
-  "description": "",
+  "description": "百度图片的爬虫",
   "main": "./source/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
