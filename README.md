@@ -13,7 +13,7 @@
   开启任务
   
 ### 2. npm clean
-清空images文件夹（***清及时转移已经下载的图片***）以及result.json中的爬取进度（pn）
+清空images文件夹（***请及时转移已经下载的图片***）以及result.json中的爬取进度（pn）
 
 ### 3. npm get
 
