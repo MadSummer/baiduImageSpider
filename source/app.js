@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:21 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-06 17:37:23
+ * @Last Modified time: 2017-07-10 11:23:51
  */
 const CONFIG = require('./config');
 const request = require('request-promise');
@@ -29,9 +29,10 @@ function start() {
     let data = JSON.parse(result);
     for (let i = 0; i < data.length; i++) {
       let obj = data[i];
+      if (obj.pn >= CONFIG.max) continue;
       for (let j = 0; j < CONFIG.total; j++) {
         let list = yield getJSON(obj);
-        if (!list.data) return;
+        if (!list || !list.data) continue;
         for (let k = 0; k < list.data.length; k++) {
           let data = list.data[k];
           let flag = yield getImage(data, obj);
