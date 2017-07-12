@@ -2,24 +2,44 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:13 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-06 10:39:28
+ * @Last Modified time: 2017-07-12 17:25:34
  */
 const rimraf = require('rimraf');
 const path = require('path');
 const fs = require('fs');
-rimraf(path.resolve(__dirname, '../images'), (err) => {
-  if (err) return console.log('清除图片失败！');
-  console.log('清除图片完成！');
-  fs.readFile(path.resolve(__dirname, '../result.json'), 'utf8', (err, result) => {
-    if (err) {
-      log.error(`读取结果文件出错，读取路径：\n${path.resolve(__dirname, '../result.json')}\n${err.message}`);
-      return;
-    }
-    let data = JSON.parse(result);
-    data.forEach(star => {
-      star.pn = 1;
+const yesno = require('yesno');
+const yn = require('yn');
+const chalk = require('chalk');
+const ProgressBar = require('progress');
+const tips = `This will delete all the pictures and reset the download progress ,are you sure continue ?`;
+yesno.ask(tips, false, ok => {
+  ok = yn(ok);
+  if (ok) {
+    console.log(chalk.yellow(`start progress`));
+    let bar = new ProgressBar(':bar', {
+      total: 100
     });
-    fs.writeFileSync(path.resolve(__dirname, '../result.json'), JSON.stringify(data));
-    console.log(`清除爬取进度完成！`); 
-  });
+    rimraf(path.resolve(__dirname, '../images'), (err) => {
+      if (err) return console.log(chalk.red(`something wrong`));
+      bar.tick();
+      fs.readFile(path.resolve(__dirname, '../result.json'), 'utf8', (err, result) => {
+        if (err) {
+          return;
+        }
+        let data = JSON.parse(result);
+        data.forEach((star, index) => {
+          star.pn = 1;
+          if (!bar.complete) {
+            bar.tick();
+          }
+        });
+        fs.writeFileSync(path.resolve(__dirname, '../result.json'), JSON.stringify(data));
+        console.log(chalk.green(`all done...`));
+        process.exit();
+      });
+    })
+  } else {
+    console.log(chalk.yellow('Canceled..'));
+    process.exit();
+  }
 })

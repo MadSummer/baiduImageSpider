@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 18:23:57 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-07 16:31:36
+ * @Last Modified time: 2017-07-12 17:22:32
  */
 
 const request = require('request-promise');
@@ -87,7 +87,7 @@ module.exports = function (data, obj) {
       onFulfilled(true);
     }).catch(err => {
       onFulfilled(false);
-      log.error(`抓取图片失败，err = ${err}`);
+      log.error(`抓取图片失败，err = ${err.message}`);
     });
   });
 }

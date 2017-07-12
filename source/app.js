@@ -2,7 +2,7 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:21 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-10 11:23:51
+ * @Last Modified time: 2017-07-12 17:21:07
  */
 const CONFIG = require('./config');
 const request = require('request-promise');
@@ -16,11 +16,7 @@ const getImage = require('./getImage');
 let successNum = 0;
 let failedNum = 0;
 
-
-
-
 start();
-
 
 function start() {
   const startTime = +new Date() / 1000;
