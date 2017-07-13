@@ -2,12 +2,16 @@
  * @Author: Liu Jing 
  * @Date: 2017-07-03 16:54:21 
  * @Last Modified by: Liu Jing
- * @Last Modified time: 2017-07-12 17:21:07
+ * @Last Modified time: 2017-07-13 12:06:26
  */
 const CONFIG = require('./config');
 const request = require('request-promise');
 const co = require('co');
 const fs = require('fs');
+const ProgressBar = require('progress');
+const {
+  exec
+} = require('child_process');
 const path = require('path');
 const log = require('./log');
 const readFile = require('fs-readfile-promise');
@@ -16,8 +20,35 @@ const getImage = require('./getImage');
 let successNum = 0;
 let failedNum = 0;
 
+const shutdown = process.argv[2];
+const time = process.argv[3] || 100;
+let bar = new ProgressBar(':barthe computer will be shutdown,press anykey to cancel', {
+  total: +time /10
+});
+let yesno = require('yesno');
+let i = 0;
+const program = require('commander');
+program
+  .option('-s, --shutdown', 'shutdown after task over')
+  .option('-t, --time', 'shutdown time remind', 300)
+  .parse(process.argv);
 start();
-
+if (program.shutdown) {
+  yesno.ask('the computer will be shutdown... press anykey to cancel', false, () => {
+    clearInterval(timer);
+    process.exit();
+  })
+  let timer = setInterval(() => {
+    i++;
+    if (bar.complete) {
+      clearInterval(timer);
+      exec(`shutdown -s -f -t`, () => {
+        console.log(``);
+      });
+    }
+    bar.tick();
+  }, 1000);
+}
 function start() {
   const startTime = +new Date() / 1000;
   co(function* () {
